@@ -34,6 +34,22 @@ router.get("/:email", (req, res) => {
 	res.send(filtered_users);
 });
 
+// GET users with a particular Last Name eg. 'wick'
+// test from terminal
+// Invoke-RestMethod -Uri 'http://localhost:5000/user/lastName/wick' -Method Get
+// response:
+/* 
+firstName lastName email              DOB       
+--------- -------- -----              ---
+John      wick     johnwick@gamil.com 22-01-1990 
+*/
+
+router.get("/lastName/:lastName", (req, res) => {
+	const lastName = req.params.lastName;
+	let filtered_lastname = users.filter((user) => user.lastName === lastName);
+	res.send(filtered_lastname);
+});
+
 // POST request: Create a new user
 router.post("/", (req, res) => {
 	users.push({
